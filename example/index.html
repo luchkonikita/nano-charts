@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <script type='module'>
+      import NanoCharts from 'http://localhost:3000/dist/nano-charts.es5.js';
+
+      const chart = new NanoCharts(document.getElementById('chart'))
+      chart.setData({
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        samples: {
+          'Apples': [10, 50, 80, 40, 20, 0, 50, 60, 50, 20, 30, 10],
+          'Oranges': [0, 70, 85, 30, 20, 30, 50, 60, 30, 25, 25, 30],
+          'Pickles': [5, 40, 35, 40, 30, 20, 20, 30, 45, 55, 35, 50]
+        },
+        options: {
+          'Apples': {
+            color: 'blueviolet'
+          },
+          'Oranges': {
+            color: 'cornflowerblue'
+          },
+          'Pickles': {
+            color: 'crimson'
+          }
+        }
+      })
+    </script>
+  </head>
+
+  <body style='padding: 20px;'>
+    <h1 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Average metrics</h1>
+    <div id='chart' style='height: 300px;font-family:Arial, Helvetica, sans-serif;'></div>
+  </body>
+</html>

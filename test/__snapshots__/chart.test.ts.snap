@@ -1,0 +1,611 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chart destroy cleans up the target node 1`] = `
+<div
+  style="width: 1000px; height: 200px; position: relative;"
+/>
+`;
+
+exports[`Chart initialization appends the SVG 1`] = `
+<div
+  style="width: 1000px; height: 200px; position: relative;"
+>
+  <svg
+    class="nano-charts"
+    height="200"
+    viewBox="0 0 1000 200"
+    width="1000"
+  >
+    <g
+      transform="translate(80, 40)"
+    />
+    <g />
+  </svg>
+  <div
+    class="nano-charts-tooltip"
+  />
+  <div
+    class="nano-charts-overlay"
+  />
+  <style>
+    
+    .nano-charts-label {
+      line-height: 20;
+    }
+    .nano-charts-tooltip {
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 1px solid #000;
+      border-radius: 2px;
+      color: #fafafa;
+      font-size: 12px;
+      left: 0;
+      line-height: 16px;
+      opacity: 0;
+      padding: 16px;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      transition-delay: 150ms;
+      transition-duration: 150ms;
+      transition-property: opacity;
+    }
+    .nano-charts-tooltip.is-visible {
+      opacity: 1;
+    }
+    .nano-charts-overlay {
+      bottom: 30px;
+      left: 70px;
+      position: absolute;
+      right: 70px;
+      top: 30px;
+    }
+    .nano-charts-title {
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    .nano-charts-item {
+      margin: 0;
+    }
+    .nano-charts-badge {
+      border-radius: 4px;
+      display: inline-block;
+      height: 8px;
+      margin-right: 4px;
+      width: 8px;
+    }
+  
+  </style>
+</div>
+`;
+
+exports[`Chart resize re-calculates the coordinates 1`] = `
+<div
+  style="width: 800px; height: 200px; position: relative;"
+>
+  <svg
+    class="nano-charts"
+    height="200"
+    viewBox="0 0 800 200"
+    width="800"
+  >
+    <g
+      transform="translate(80, 40)"
+    >
+      <line
+        stroke="#ececec"
+        x1="0"
+        x2="0"
+        y1="-5"
+        y2="125"
+      />
+      <line
+        stroke="#ececec"
+        x1="320"
+        x2="320"
+        y1="-5"
+        y2="125"
+      />
+      <line
+        stroke="#ececec"
+        x1="640"
+        x2="640"
+        y1="-5"
+        y2="125"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="660"
+        y1="120"
+        y2="120"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="660"
+        y1="96"
+        y2="96"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="660"
+        y1="72"
+        y2="72"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="660"
+        y1="48"
+        y2="48"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="660"
+        y1="24"
+        y2="24"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="660"
+        y1="0"
+        y2="0"
+      />
+      <path
+        d="M 0 72,L 320 84,L 640 96"
+        fill="transparent"
+        stroke="violet"
+        stroke-width="1"
+      />
+      <circle
+        cx="0"
+        cy="72"
+        fill="violet"
+        r="2"
+      />
+      <circle
+        cx="320"
+        cy="84"
+        fill="violet"
+        r="2"
+      />
+      <circle
+        cx="640"
+        cy="96"
+        fill="violet"
+        r="2"
+      />
+      <path
+        d="M 0 96,L 320 84,L 640 120"
+        fill="transparent"
+        stroke="#6a6a6a"
+        stroke-width="1"
+      />
+      <circle
+        cx="0"
+        cy="96"
+        fill="#6a6a6a"
+        r="2"
+      />
+      <circle
+        cx="320"
+        cy="84"
+        fill="#6a6a6a"
+        r="2"
+      />
+      <circle
+        cx="640"
+        cy="120"
+        fill="#6a6a6a"
+        r="2"
+      />
+    </g>
+    <g>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="middle"
+        x="80"
+        y="180"
+      >
+        Jan...
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="middle"
+        x="400"
+        y="180"
+      >
+        Feb...
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="middle"
+        x="720"
+        y="180"
+      >
+        March
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="160"
+      >
+        -20
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="136"
+      >
+        -10
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="112"
+      >
+        0
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="88"
+      >
+        10
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="64"
+      >
+        20
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="40"
+      >
+        30
+      </text>
+    </g>
+  </svg>
+  <div
+    class="nano-charts-tooltip"
+  />
+  <div
+    class="nano-charts-overlay"
+  />
+  <style>
+    
+    .nano-charts-label {
+      line-height: 20;
+    }
+    .nano-charts-tooltip {
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 1px solid #000;
+      border-radius: 2px;
+      color: #fafafa;
+      font-size: 12px;
+      left: 0;
+      line-height: 16px;
+      opacity: 0;
+      padding: 16px;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      transition-delay: 150ms;
+      transition-duration: 150ms;
+      transition-property: opacity;
+    }
+    .nano-charts-tooltip.is-visible {
+      opacity: 1;
+    }
+    .nano-charts-overlay {
+      bottom: 30px;
+      left: 70px;
+      position: absolute;
+      right: 70px;
+      top: 30px;
+    }
+    .nano-charts-title {
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    .nano-charts-item {
+      margin: 0;
+    }
+    .nano-charts-badge {
+      border-radius: 4px;
+      display: inline-block;
+      height: 8px;
+      margin-right: 4px;
+      width: 8px;
+    }
+  
+  </style>
+</div>
+`;
+
+exports[`Chart setData sets the data 1`] = `
+<div
+  style="width: 1000px; height: 200px; position: relative;"
+>
+  <svg
+    class="nano-charts"
+    height="200"
+    viewBox="0 0 1000 200"
+    width="1000"
+  >
+    <g
+      transform="translate(80, 40)"
+    >
+      <line
+        stroke="#ececec"
+        x1="0"
+        x2="0"
+        y1="-5"
+        y2="125"
+      />
+      <line
+        stroke="#ececec"
+        x1="420"
+        x2="420"
+        y1="-5"
+        y2="125"
+      />
+      <line
+        stroke="#ececec"
+        x1="840"
+        x2="840"
+        y1="-5"
+        y2="125"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="860"
+        y1="120"
+        y2="120"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="860"
+        y1="96"
+        y2="96"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="860"
+        y1="72"
+        y2="72"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="860"
+        y1="48"
+        y2="48"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="860"
+        y1="24"
+        y2="24"
+      />
+      <line
+        stroke="#ececec"
+        x1="-20"
+        x2="860"
+        y1="0"
+        y2="0"
+      />
+      <path
+        d="M 0 72,L 420 84,L 840 96"
+        fill="transparent"
+        stroke="violet"
+        stroke-width="1"
+      />
+      <circle
+        cx="0"
+        cy="72"
+        fill="violet"
+        r="2"
+      />
+      <circle
+        cx="420"
+        cy="84"
+        fill="violet"
+        r="2"
+      />
+      <circle
+        cx="840"
+        cy="96"
+        fill="violet"
+        r="2"
+      />
+      <path
+        d="M 0 96,L 420 84,L 840 120"
+        fill="transparent"
+        stroke="#6a6a6a"
+        stroke-width="1"
+      />
+      <circle
+        cx="0"
+        cy="96"
+        fill="#6a6a6a"
+        r="2"
+      />
+      <circle
+        cx="420"
+        cy="84"
+        fill="#6a6a6a"
+        r="2"
+      />
+      <circle
+        cx="840"
+        cy="120"
+        fill="#6a6a6a"
+        r="2"
+      />
+    </g>
+    <g>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="middle"
+        x="80"
+        y="180"
+      >
+        Jan...
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="middle"
+        x="500"
+        y="180"
+      >
+        Feb...
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="middle"
+        x="920"
+        y="180"
+      >
+        March
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="160"
+      >
+        -20
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="136"
+      >
+        -10
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="112"
+      >
+        0
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="88"
+      >
+        10
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="64"
+      >
+        20
+      </text>
+      <text
+        alignment-baseline="middle"
+        font-size="12"
+        text-anchor="end"
+        x="40"
+        y="40"
+      >
+        30
+      </text>
+    </g>
+  </svg>
+  <div
+    class="nano-charts-tooltip"
+  />
+  <div
+    class="nano-charts-overlay"
+  />
+  <style>
+    
+    .nano-charts-label {
+      line-height: 20;
+    }
+    .nano-charts-tooltip {
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 1px solid #000;
+      border-radius: 2px;
+      color: #fafafa;
+      font-size: 12px;
+      left: 0;
+      line-height: 16px;
+      opacity: 0;
+      padding: 16px;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      transition-delay: 150ms;
+      transition-duration: 150ms;
+      transition-property: opacity;
+    }
+    .nano-charts-tooltip.is-visible {
+      opacity: 1;
+    }
+    .nano-charts-overlay {
+      bottom: 30px;
+      left: 70px;
+      position: absolute;
+      right: 70px;
+      top: 30px;
+    }
+    .nano-charts-title {
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    .nano-charts-item {
+      margin: 0;
+    }
+    .nano-charts-badge {
+      border-radius: 4px;
+      display: inline-block;
+      height: 8px;
+      margin-right: 4px;
+      width: 8px;
+    }
+  
+  </style>
+</div>
+`;
