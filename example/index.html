@@ -2,25 +2,20 @@
 <html>
   <head>
     <script type='module'>
-      import NanoCharts from 'http://localhost:3000/dist/nano-charts.es5.js';
+      import Chart from 'http://localhost:3000/dist/nano-charts.es5.js';
 
-      const chart = new NanoCharts(document.getElementById('chart'))
-      chart.setData({
+      new Chart(document.getElementById('chart'), {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         samples: {
-          'Apples': [10, 50, 80, 40, 20, 0, 50, 60, 50, 20, 30, 10],
-          'Oranges': [0, 70, 85, 30, 20, 30, 50, 60, 30, 25, 25, 30],
-          'Pickles': [5, 40, 35, 40, 30, 20, 20, 30, 45, 55, 35, 50]
+          Apples: [10, 50, 80, 40, 20, 0, 50, 60, 50, 20, 30, 10],
+          Oranges: [0, 70, 85, 30, 20, 30, 70, 30, 30, 25, 25, 30]
         },
         options: {
-          'Apples': {
-            color: 'blueviolet'
+          Apples: {
+            color: '#f44336'
           },
-          'Oranges': {
-            color: 'cornflowerblue'
-          },
-          'Pickles': {
-            color: 'crimson'
+          Oranges: {
+            color: '#673ab7'
           }
         }
       })

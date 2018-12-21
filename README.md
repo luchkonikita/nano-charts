@@ -3,7 +3,7 @@
 A zero-dependency goodness for visualizing your data.
 Currently only implements the [Line Chart](https://en.wikipedia.org/wiki/Line_chart).
 
-![](https://cdn-std.dprcdn.net/files/acc_99774/jR7e5f)
+![](https://cdn-std.dprcdn.net/files/acc_99774/0MOtQ4)
 
 ## Why another charts library?
 
@@ -18,20 +18,18 @@ The next will provide you with a working chart:
 ```javascript
 import Chart from 'nano-charts'
 
-const chart = new Chart(document.getElementById('chart'))
-
-chart.setData({
-  labels: ['January', 'February', 'March'],
+new Chart(document.getElementById('chart'), {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   samples: {
-    'Apples': [10, 50, 80],
-    'Oranges': [0, 70, 85]
+    Apples: [10, 50, 80, 40, 20, 0, 50, 60, 50, 20, 30, 10],
+    Oranges: [0, 70, 85, 30, 20, 30, 70, 30, 30, 25, 25, 30]
   },
   options: {
     Apples: {
-      color: 'blueviolet'
+      color: '#f44336'
     },
     Oranges: {
-      color: 'cornflowerblue'
+      color: '#673ab7'
     }
   }
 })

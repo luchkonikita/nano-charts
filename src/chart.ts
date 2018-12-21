@@ -238,7 +238,7 @@ export default class Chart {
   private hoveredIndex = -1
   private points: SVGCircleElement[][] = []
 
-  constructor(el: HTMLElement) {
+  constructor(el: HTMLElement, data?: ChartData) {
     this.el = el
     // TODO: Avoid touching the wrapper if possible.
     this.el.style.position = 'relative'
@@ -270,6 +270,8 @@ export default class Chart {
     this.resetCache()
     this.setSize()
     this.setHandlers()
+
+    if (data) this.setData(data)
   }
 
   setData(data: ChartData) {
@@ -381,7 +383,13 @@ export default class Chart {
       const coordinates = convertToCoordinates(samples, this.paddedViewport, rangesConstraint)
       const color = this.getColorFor(key)
 
+      const areaCoordinates = coordinates.concat([
+        convertToCoordinate(samples.length - 1, 0, this.paddedViewport, rangesConstraint),
+        convertToCoordinate(0, 0, this.paddedViewport, rangesConstraint)
+      ])
+
       this.drawDataLine(coordinates, color)
+      this.drawDataArea(areaCoordinates, color)
       const points = this.drawDataPoints(coordinates, color)
 
       // Store the points so they can be highlighted later.
@@ -440,6 +448,22 @@ export default class Chart {
 
     mainArea.appendChild(line)
     return line
+  }
+
+  private drawDataArea(
+    coordinates: ViewportCoordinate[],
+    color: string
+  ): SVGPathElement {
+    const {mainArea} = this
+    const area = createSVGElement('path', {
+      'stroke-width': 1,
+      'fill': color + '08', // TODO: Write a better color-manipulation
+      'stroke': 'transparent',
+      'd': convertToPath(coordinates)
+    }) as SVGPathElement
+
+    mainArea.appendChild(area)
+    return area
   }
 
   private drawDataPoints(
