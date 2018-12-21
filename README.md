@@ -3,6 +3,8 @@
 A zero-dependency goodness for visualizing your data.
 Currently only implements the [Line Chart](https://en.wikipedia.org/wiki/Line_chart).
 
+![](https://cdn-std.dprcdn.net/files/acc_99774/jR7e5f)
+
 ## Why another charts library?
 
 - No external dependencies.
