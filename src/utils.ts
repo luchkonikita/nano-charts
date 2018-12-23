@@ -13,8 +13,10 @@ export function throttle<T extends (...args: any[]) => any>(fn: T, time: number)
   const throttled = (...args: any[]) => {
     if (pending) return
     pending = true
+
+    fn(...args)
+
     setTimeout(() => {
-      fn(...args)
       pending = false
     }, time)
   }
@@ -41,7 +43,6 @@ export function setAttributes(el: SVGElement | HTMLElement, attributes: Attribut
 export function convertToPath(coordinates: ViewportCoordinate[]): string {
   const head = coordinates[0]
   const tail = coordinates.slice(1)
-  const last = tail[tail.length - 1]
 
   return [
     `M ${head[0]} ${head[1]}`

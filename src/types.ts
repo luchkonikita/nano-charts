@@ -1,6 +1,6 @@
 export type Settings = {
   cssClassName: string
-  defaultLineColor: string
+  strokeColor: string
   gridColor: string
   labelFontSize: number
   maxLabelHeight: number
@@ -30,7 +30,8 @@ export type ChartData = {
   options?: {
     // TODO: Write better type
     [index: string]: {
-      color?: string
+      stroke?: string
+      fill?: string
     }
   }
 }
@@ -56,3 +57,5 @@ export type TooltipRendererSample = {
   value: string
   color: string
 }
+
+export type TooltipRenderer = (label: string, samples: TooltipRendererSample[]) => string

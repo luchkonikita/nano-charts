@@ -1,7 +1,6 @@
-import {
-  getRangesConstraint,
-  getValuesForRange
-} from './calculations'
+import { getRangesConstraint, getValuesForRange } from './calculations'
+import DEFAULTS from './defaults'
+import Tooltip, { defaultTooltipRenderer } from './tooltip'
 import {
   ChartData,
   Settings,
@@ -19,25 +18,6 @@ import {
   throttle
 } from './utils'
 
-const DEFAULTS: Settings = {
-  cssClassName: 'nano-charts',
-  defaultLineColor: '#6a6a6a',
-  gridColor: '#ececec',
-  labelFontSize: 12,
-  maxLabelHeight: 20,
-  maxLabelWidth: 60,
-  mousemoveTimeout: 50,
-  overlayOverlap: 10,
-  paddingH: 80,
-  paddingV: 40,
-  pointHoverRadius: 4,
-  pointRadius: 2,
-  resizeTimeout: 300,
-  tooltipOffsetX: 10,
-  xGridOverflowSize: 20,
-  yGridOverflowSize: 5
-}
-
 function reduceCollection<T>(collection: T[]): T[] {
   return collection.reduce((memo, item, index) => {
     if (index === 0 || index % 2 === 0) memo.push(item)
@@ -47,20 +27,6 @@ function reduceCollection<T>(collection: T[]): T[] {
 
 function mapLabel(label: string | number, index: number) {
   return {label, index}
-}
-
-function renderTooltipContent(label: string, samples: TooltipRendererSample[]): string {
-  const { cssClassName } = DEFAULTS
-  let content = `<header class="${cssClassName}-title">${label}</header>`
-  samples.forEach(({color, key, value}) => {
-    content += `
-      <p class="${cssClassName}-item">
-        <span class="${cssClassName}-badge" style="background-color: ${color};"></span>
-        ${key} - ${value}
-      </p>
-    `
-  })
-  return content
 }
 
 function createStylesheet(settings = DEFAULTS): HTMLStyleElement {
@@ -160,10 +126,10 @@ export default class Chart {
     const {
       clientRect,
       data,
-      getColorFor,
       getIndexForXOffset,
+      getSamplesForIndex,
+      hoverCirclesAtIndex,
       paddedViewport,
-      points,
       rangesConstraint,
       tooltip
     } = this
@@ -171,18 +137,10 @@ export default class Chart {
     const index = getIndexForXOffset(e.clientX)
     if (index < 0) return
 
-    const values: number[] = []
     const label = data.labels[index]
-    const samples: TooltipRendererSample[] = []
+    const {samples, values} = getSamplesForIndex(index)
 
-    Object.keys(data.samples).forEach(key => {
-      const value = data.samples[key][index]
-      const color = getColorFor(key)
-      samples.push({color, key, value: value.toString()})
-      values.push(value)
-    })
-
-    tooltip.innerHTML = renderTooltipContent(label, samples)
+    tooltip.update(label, samples)
 
     const meanValue = values.reduce((memo: number, current: number) => memo += current, 0) / values.length
     const coordinates = convertToCoordinate(index, meanValue, paddedViewport, rangesConstraint)
@@ -206,14 +164,8 @@ export default class Chart {
       x = x - tooltipRect.width - DEFAULTS.tooltipOffsetX * 2
     }
 
-    // TODO: Extract to a separate function maybe...
-    const hoveredBefore = points[this.hoveredIndex]
-    if (hoveredBefore) hoveredBefore.forEach(point => setAttributes(point, { r: DEFAULTS.pointRadius }))
-    const hoveredPoints = points[index]
-    hoveredPoints.forEach(point => setAttributes(point, { r: DEFAULTS.pointHoverRadius }))
-    this.hoveredIndex = index
-
-    tooltip.style.transform = `translate(${x}px, ${y}px)`
+    hoverCirclesAtIndex(index)
+    tooltip.moveTo(x, y)
   }, DEFAULTS.mousemoveTimeout)
 
   // Elements
@@ -221,7 +173,7 @@ export default class Chart {
   private svg: SVGElement
   private mainArea: SVGElement
   private expandedArea: SVGElement
-  private tooltip: HTMLDivElement
+  private tooltip: Tooltip
   private style: HTMLStyleElement
   private hoverOverlay: HTMLDivElement
   private destroyed = false
@@ -256,8 +208,9 @@ export default class Chart {
     this.svg.appendChild(this.expandedArea)
 
     // Render the tooltip
-    this.tooltip = createElement('div', {class: DEFAULTS.cssClassName + '-tooltip'}) as HTMLDivElement
-    this.el.appendChild(this.tooltip)
+
+    this.tooltip = new Tooltip(defaultTooltipRenderer)
+    this.el.appendChild(this.tooltip.el)
 
     // Render overlay for hover events tracking
     this.hoverOverlay = createElement('div', {class: DEFAULTS.cssClassName + '-overlay'}) as HTMLDivElement
@@ -300,8 +253,9 @@ export default class Chart {
     hoverOverlay.removeEventListener('mouseenter', mouseenterHandler)
     hoverOverlay.removeEventListener('mouseleave', mouseleaveHandler)
     hoverOverlay.removeEventListener('mousemove', mousemoveHandler)
+
     el.removeChild(svg)
-    el.removeChild(tooltip)
+    el.removeChild(tooltip.el)
     el.removeChild(hoverOverlay)
     el.removeChild(style)
 
@@ -318,12 +272,12 @@ export default class Chart {
 
   private mouseenterHandler = (e: MouseEvent) => {
     this.hovered = true
-    this.tooltip.classList.add('is-visible')
+    this.tooltip.show()
   }
 
   private mouseleaveHandler = (e: MouseEvent) => {
     this.hovered = false
-    this.tooltip.classList.remove('is-visible')
+    this.tooltip.hide()
   }
 
   private setSize() {
@@ -381,22 +335,26 @@ export default class Chart {
     Object.keys(this.data.samples).forEach(key => {
       const samples = this.data.samples[key]
       const coordinates = convertToCoordinates(samples, this.paddedViewport, rangesConstraint)
-      const color = this.getColorFor(key)
+      const strokeColor = this.getStrokeColorFor(key)
+      const fillColor = this.getFillColorFor(key)
 
-      const areaCoordinates = coordinates.concat([
-        convertToCoordinate(samples.length - 1, 0, this.paddedViewport, rangesConstraint),
-        convertToCoordinate(0, 0, this.paddedViewport, rangesConstraint)
-      ])
+      this.drawDataLine(coordinates, strokeColor)
 
-      this.drawDataLine(coordinates, color)
-      this.drawDataArea(areaCoordinates, color)
-      const points = this.drawDataPoints(coordinates, color)
+      const points = this.drawDataPoints(coordinates, strokeColor)
 
       // Store the points so they can be highlighted later.
       points.forEach((point: SVGCircleElement, index: number) => {
         if (!this.points[index]) this.points[index] = []
         this.points[index].push(point)
       })
+
+      // Fill the polygon with the color only is specified.
+      if (!fillColor) return
+      const areaCoordinates = coordinates.concat([
+        convertToCoordinate(samples.length - 1, 0, this.paddedViewport, rangesConstraint),
+        convertToCoordinate(0, 0, this.paddedViewport, rangesConstraint)
+      ])
+      this.drawDataArea(areaCoordinates, fillColor)
     })
   }
 
@@ -457,7 +415,7 @@ export default class Chart {
     const {mainArea} = this
     const area = createSVGElement('path', {
       'stroke-width': 1,
-      'fill': color + '08', // TODO: Write a better color-manipulation
+      'fill': color,
       'stroke': 'transparent',
       'd': convertToPath(coordinates)
     }) as SVGPathElement
@@ -531,13 +489,27 @@ export default class Chart {
     }
   }
 
+  private hoverCirclesAtIndex = (index: number) => {
+    const {hoveredIndex, points} = this
+    const hoveredBefore = points[hoveredIndex]
+    if (hoveredBefore) hoveredBefore.forEach(point => setAttributes(point, { r: DEFAULTS.pointRadius }))
+    const hoveredPoints = points[index]
+    hoveredPoints.forEach(point => setAttributes(point, { r: DEFAULTS.pointHoverRadius }))
+    this.hoveredIndex = index
+  }
+
   private getOptionsFor = (dataset: string) => {
     return this.data.options && this.data.options[dataset]
   }
 
-  private getColorFor = (dataset: string) => {
+  private getStrokeColorFor = (dataset: string) => {
     const options = this.getOptionsFor(dataset)
-    return options && options.color || DEFAULTS.defaultLineColor
+    return options && options.stroke || DEFAULTS.strokeColor
+  }
+
+  private getFillColorFor = (dataset: string) => {
+    const options = this.getOptionsFor(dataset)
+    return options && options.fill
   }
 
   // Get the closest metrics index for the chosen X position
@@ -549,5 +521,20 @@ export default class Chart {
     if (percentage < 0) return 0
     if (percentage > 100) return maxIndex
     return Math.round(maxIndex / 100 * percentage)
+  }
+
+  private getSamplesForIndex = (index: number) => {
+    const {data, getStrokeColorFor} = this
+    const values: number[] = []
+    const samples: TooltipRendererSample[] = []
+
+    Object.keys(data.samples).forEach(key => {
+      const value = data.samples[key][index]
+      const color = getStrokeColorFor(key)
+      samples.push({color, key, value: value.toString()})
+      values.push(value)
+    })
+
+    return {samples, values}
   }
 }

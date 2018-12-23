@@ -42,6 +42,7 @@ new Chart(document.getElementById('chart'), {
 - [ ] See how this can be minimized more.
 - [ ] Write a proper README.md.
 - [ ] Figure-out about needed polyfills (if any).
-- [ ] Provide a shorthand for constructor so it can use the data right away.
-- [ ] Think about filling the chart rectangles with some nice semi-transparent colors.
+- [ ] Render the legend if needed.
+- [*] Provide a shorthand for constructor so it can use the data right away.
+- [*] Think about filling the chart rectangles with some nice semi-transparent colors.
 
