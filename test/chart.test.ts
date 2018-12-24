@@ -10,7 +10,8 @@ const chartData: ChartData = {
   },
   options: {
     'Metric A': {
-      color: 'violet'
+      stroke: 'violet',
+      fill: 'violet'
     }
   }
 }
@@ -34,7 +35,6 @@ describe('Chart', () => {
     window.document.body.innerHTML = ''
     element = createMockDiv(1000, 200)
     window.document.body.appendChild(element)
-    chart = new Chart(element)
   })
 
   afterEach(() => {
@@ -43,12 +43,19 @@ describe('Chart', () => {
 
   describe('initialization', () => {
     it('appends the SVG', () => {
+      chart = new Chart(element)
+      expect(element).toMatchSnapshot()
+    })
+
+    it('allows passing data right away', () => {
+      chart = new Chart(element, chartData)
       expect(element).toMatchSnapshot()
     })
   })
 
   describe('setData', () => {
     it('sets the data', () => {
+      chart = new Chart(element)
       chart.setData(chartData)
       expect(element).toMatchSnapshot()
     })
@@ -56,6 +63,7 @@ describe('Chart', () => {
 
   describe('destroy', () => {
     it('cleans up the target node', () => {
+      chart = new Chart(element)
       chart.destroy()
       expect(element).toMatchSnapshot()
     })
@@ -63,7 +71,7 @@ describe('Chart', () => {
 
   describe('resize', () => {
     it('re-calculates the coordinates', done => {
-      chart.setData(chartData)
+      chart = new Chart(element, chartData)
       resizeMockDiv(element as HTMLDivElement, 800, 200)
       window.dispatchEvent(new Event('resize'))
 
@@ -76,7 +84,7 @@ describe('Chart', () => {
 
   describe('mouseenter and mouseleave', () => {
     it('sets flags', () => {
-      chart.setData(chartData)
+      chart = new Chart(element, chartData)
       const overlay = element.querySelector('.nano-charts-overlay') as HTMLElement
       const tooltip = element.querySelector('.nano-charts-tooltip') as HTMLElement
 
@@ -92,7 +100,7 @@ describe('Chart', () => {
 
   describe('mousemove', () => {
     it('highlights the metrics in the hovered are', async () => {
-      chart.setData(chartData)
+      chart = new Chart(element, chartData)
       const overlay = element.querySelector('.nano-charts-overlay') as HTMLElement
 
       async function assertRadiuses(asserted: string[]) {
