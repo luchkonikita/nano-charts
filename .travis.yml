@@ -15,5 +15,5 @@ jobs:
     - stage: test
       script: npm run test:prod && npm run build
     - stage: deploy
-      script: npm run semantic-release
+      script: npm run build && npm run semantic-release
       if: branch = master
