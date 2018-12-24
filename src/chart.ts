@@ -3,7 +3,6 @@ import DEFAULTS from './defaults'
 import Tooltip, { defaultTooltipRenderer } from './tooltip'
 import {
   ChartData,
-  Settings,
   TooltipRendererSample,
   ViewportCoordinate
 } from './types'

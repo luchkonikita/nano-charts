@@ -1,17 +1,21 @@
-# Nano charts
+# Nano charts 📊
+
+[![npm version](https://badge.fury.io/js/nano-charts.svg)](https://badge.fury.io/js/nano-charts)
+![](https://travis-ci.org/luchkonikita/nano-charts.svg?branch=master)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 A zero-dependency goodness for visualizing your data.
 Currently only implements the [Line Chart](https://en.wikipedia.org/wiki/Line_chart).
 
 ![](https://cdn-std.dprcdn.net/files/acc_99774/0MOtQ4)
 
-## Why another charts library?
+## Why another charts library? 🤔
 
 - No external dependencies.
 - No complicated features with complicated APIs.
 - Focus on usage simplicity and small bundle size.
 
-## Example
+## Example 💡
 
 The next will provide you with a working chart:
 
@@ -35,14 +39,14 @@ new Chart(document.getElementById('chart'), {
 })
 ```
 
-## TODOs list:
+## TODO
 
-- [ ] Generate colors automatically when needed.
-- [ ] Write missing tests.
-- [ ] See how this can be minimized more.
-- [ ] Write a proper README.md.
-- [ ] Figure-out about needed polyfills (if any).
-- [ ] Render the legend if needed.
-- [*] Provide a shorthand for constructor so it can use the data right away.
-- [*] Think about filling the chart rectangles with some nice semi-transparent colors.
+- (Feature) Generate colors automatically. Think if this is needed, though.
+- (Chore) Write missing tests.
+- (Refactoring) See how this can be minimized more.
+- (Chore) Write a proper README.md. Provide some measurements.
+- (Feature) Render the legend.
+- (Bug) Make sure empty tooltip is not showing up.
+- (Chore) Add bundle size check.
+- (Feature) Animations.
 
