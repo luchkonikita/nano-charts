@@ -1,9 +1,5 @@
 export function createMockDiv (width: number, height: number) {
   const div = document.createElement('div')
-  Object.assign(div.style, {
-    width: width + 'px',
-    height: height + 'px'
-  })
   div.getBoundingClientRect = () => ({
     width,
     height,

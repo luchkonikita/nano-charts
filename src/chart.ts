@@ -38,6 +38,9 @@ function createStylesheet(settings = DEFAULTS): HTMLStyleElement {
 
   const stylesheet = document.createElement('style')
   stylesheet.innerHTML = `
+    .${cssClassName} {
+      font-family:Arial, Helvetica, sans-serif;
+    }
     .${cssClassName}-label {
       line-height: ${DEFAULTS.maxLabelHeight};
     }
@@ -46,6 +49,7 @@ function createStylesheet(settings = DEFAULTS): HTMLStyleElement {
       border: 1px solid #000;
       border-radius: 2px;
       color: #fafafa;
+      font-family:Arial, Helvetica, sans-serif;
       font-size: 12px;
       left: 0;
       line-height: 16px;
@@ -192,7 +196,8 @@ export default class Chart {
   constructor(el: HTMLElement, data?: ChartData) {
     this.el = el
     // TODO: Avoid touching the wrapper if possible.
-    this.el.style.position = 'relative'
+    if (!el.style.height) el.style.height = DEFAULTS.minContainerHeight + 'px'
+    if (!el.style.position) el.style.position = 'relative'
 
     // Render SVG
     this.svg = createSVGElement('svg', {class: DEFAULTS.cssClassName})

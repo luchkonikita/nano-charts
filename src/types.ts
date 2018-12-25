@@ -5,6 +5,7 @@ export type Settings = {
   labelFontSize: number
   maxLabelHeight: number
   maxLabelWidth: number
+  minContainerHeight: number
   mousemoveTimeout: number
   overlayOverlap: number
   paddingH: number

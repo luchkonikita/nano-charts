@@ -7,6 +7,7 @@ const DEFAULTS: Settings = {
   labelFontSize: 12,
   maxLabelHeight: 20,
   maxLabelWidth: 60,
+  minContainerHeight: 250,
   mousemoveTimeout: 50,
   overlayOverlap: 10,
   paddingH: 80,

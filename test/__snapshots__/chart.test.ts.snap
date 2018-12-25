@@ -2,13 +2,13 @@
 
 exports[`Chart destroy cleans up the target node 1`] = `
 <div
-  style="width: 1000px; height: 200px; position: relative;"
+  style="height: 200px; position: relative;"
 />
 `;
 
 exports[`Chart initialization allows passing data right away 1`] = `
 <div
-  style="width: 1000px; height: 200px; position: relative;"
+  style="height: 200px; position: relative;"
 >
   <svg
     class="nano-charts"
@@ -229,6 +229,9 @@ exports[`Chart initialization allows passing data right away 1`] = `
   />
   <style>
     
+    .nano-charts {
+      font-family:Arial, Helvetica, sans-serif;
+    }
     .nano-charts-label {
       line-height: 20;
     }
@@ -237,6 +240,7 @@ exports[`Chart initialization allows passing data right away 1`] = `
       border: 1px solid #000;
       border-radius: 2px;
       color: #fafafa;
+      font-family:Arial, Helvetica, sans-serif;
       font-size: 12px;
       left: 0;
       line-height: 16px;
@@ -280,7 +284,7 @@ exports[`Chart initialization allows passing data right away 1`] = `
 
 exports[`Chart initialization appends the SVG 1`] = `
 <div
-  style="width: 1000px; height: 200px; position: relative;"
+  style="height: 200px; position: relative;"
 >
   <svg
     class="nano-charts"
@@ -301,6 +305,9 @@ exports[`Chart initialization appends the SVG 1`] = `
   />
   <style>
     
+    .nano-charts {
+      font-family:Arial, Helvetica, sans-serif;
+    }
     .nano-charts-label {
       line-height: 20;
     }
@@ -309,6 +316,7 @@ exports[`Chart initialization appends the SVG 1`] = `
       border: 1px solid #000;
       border-radius: 2px;
       color: #fafafa;
+      font-family:Arial, Helvetica, sans-serif;
       font-size: 12px;
       left: 0;
       line-height: 16px;
@@ -352,7 +360,7 @@ exports[`Chart initialization appends the SVG 1`] = `
 
 exports[`Chart resize re-calculates the coordinates 1`] = `
 <div
-  style="width: 800px; height: 200px; position: relative;"
+  style="height: 200px; position: relative; width: 800px;"
 >
   <svg
     class="nano-charts"
@@ -573,6 +581,9 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
   />
   <style>
     
+    .nano-charts {
+      font-family:Arial, Helvetica, sans-serif;
+    }
     .nano-charts-label {
       line-height: 20;
     }
@@ -581,6 +592,7 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
       border: 1px solid #000;
       border-radius: 2px;
       color: #fafafa;
+      font-family:Arial, Helvetica, sans-serif;
       font-size: 12px;
       left: 0;
       line-height: 16px;
@@ -624,7 +636,7 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
 
 exports[`Chart setData sets the data 1`] = `
 <div
-  style="width: 1000px; height: 200px; position: relative;"
+  style="height: 200px; position: relative;"
 >
   <svg
     class="nano-charts"
@@ -845,6 +857,9 @@ exports[`Chart setData sets the data 1`] = `
   />
   <style>
     
+    .nano-charts {
+      font-family:Arial, Helvetica, sans-serif;
+    }
     .nano-charts-label {
       line-height: 20;
     }
@@ -853,6 +868,7 @@ exports[`Chart setData sets the data 1`] = `
       border: 1px solid #000;
       border-radius: 2px;
       color: #fafafa;
+      font-family:Arial, Helvetica, sans-serif;
       font-size: 12px;
       left: 0;
       line-height: 16px;

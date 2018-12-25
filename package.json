@@ -29,6 +29,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "commit": "git-cz",
     "semantic-release": "semantic-release"
   },
   "jest": {
