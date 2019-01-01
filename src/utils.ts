@@ -48,7 +48,7 @@ export function convertToPath(coordinates: ViewportCoordinate[]): string {
     `M ${head[0]} ${head[1]}`
   ].concat(
     tail.map(pair => `L ${pair[0]} ${pair[1]}`)
-  ).join(',')
+  ).join(' ')
 }
 
 export function convertToCoordinates(
