@@ -2,13 +2,13 @@
 
 exports[`Chart destroy cleans up the target node 1`] = `
 <div
-  style="height: 200px; position: relative;"
+  style="height: 250px; position: relative;"
 />
 `;
 
 exports[`Chart initialization allows passing data right away 1`] = `
 <div
-  style="height: 200px; position: relative;"
+  style="height: 250px; position: relative;"
 >
   <svg
     class="nano-charts"
@@ -284,7 +284,7 @@ exports[`Chart initialization allows passing data right away 1`] = `
 
 exports[`Chart initialization appends the SVG 1`] = `
 <div
-  style="height: 200px; position: relative;"
+  style="height: 250px; position: relative;"
 >
   <svg
     class="nano-charts"
@@ -636,7 +636,7 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
 
 exports[`Chart setData sets the data 1`] = `
 <div
-  style="height: 200px; position: relative;"
+  style="height: 250px; position: relative;"
 >
   <svg
     class="nano-charts"
