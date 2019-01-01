@@ -23,15 +23,22 @@
   "scripts": {
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "lint:fix": "tslint  --project tsconfig.json -t codeFrame --fix 'src/**/*.ts' 'test/**/*.ts'",
+    "bundlesize": "bundlesize",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts",
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "test:prod": "npm run bundlesize & npm run lint && npm run test -- --coverage --no-cache",
     "commit": "git-cz",
     "semantic-release": "semantic-release"
   },
+  "bundlesize": [
+    {
+      "path": "./dist/nano-charts.es5.js",
+      "maxSize": "4 kB"
+    }
+  ],
   "jest": {
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest"
@@ -63,6 +70,7 @@
   "devDependencies": {
     "@types/jest": "^23.3.2",
     "@types/node": "^10.11.0",
+    "bundlesize": "^0.17.0",
     "commitizen": "^3.0.5",
     "cz-conventional-changelog": "2.1.0",
     "jest": "^23.6.0",

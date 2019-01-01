@@ -31,6 +31,7 @@ function mapLabel(label: string | number, index: number) {
 function createStylesheet(settings = DEFAULTS): HTMLStyleElement {
   const {
     cssClassName,
+    maxLabelHeight,
     overlayOverlap,
     paddingH,
     paddingV
@@ -42,7 +43,7 @@ function createStylesheet(settings = DEFAULTS): HTMLStyleElement {
       font-family:Arial, Helvetica, sans-serif;
     }
     .${cssClassName}-label {
-      line-height: ${DEFAULTS.maxLabelHeight};
+      line-height: ${maxLabelHeight};
     }
     .${cssClassName}-tooltip {
       background-color: rgba(0, 0, 0, 0.8);

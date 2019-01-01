@@ -46,6 +46,5 @@ new Chart(document.getElementById('chart'), {
 - (Refactoring) See how this can be minimized more.
 - (Chore) Write a proper README.md. Provide some measurements.
 - (Feature) Render the legend.
-- (Chore) Add bundle size check.
 - (Feature) Animations.
 
