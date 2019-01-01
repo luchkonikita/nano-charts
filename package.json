@@ -29,14 +29,14 @@
     "start": "rollup -c rollup.config.ts -w",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:prod": "npm run bundlesize & npm run lint && npm run test -- --coverage --no-cache",
+    "test:prod": "npm run build && npm run bundlesize && npm run lint && npm run test -- --coverage --no-cache",
     "commit": "git-cz",
     "semantic-release": "semantic-release"
   },
   "bundlesize": [
     {
       "path": "./dist/nano-charts.es5.js",
-      "maxSize": "4 kB"
+      "maxSize": "4.5 kB"
     }
   ],
   "jest": {

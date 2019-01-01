@@ -3,7 +3,11 @@
 exports[`Chart destroy cleans up the target node 1`] = `
 <div
   style="height: 250px; position: relative;"
-/>
+>
+  <div
+    class="nano-charts-legend"
+  />
+</div>
 `;
 
 exports[`Chart initialization allows passing data right away 1`] = `
@@ -227,6 +231,43 @@ exports[`Chart initialization allows passing data right away 1`] = `
   <div
     class="nano-charts-overlay"
   />
+  <div
+    class="nano-charts-legend"
+  >
+    
+        
+    <span
+      class="nano-charts-legend-item"
+    >
+      
+          
+      <span
+        class="nano-charts-legend-item-badge"
+        style="background-color: violet; color: violet;"
+      />
+      
+          Metric A
+        
+    </span>
+    
+      
+        
+    <span
+      class="nano-charts-legend-item"
+    >
+      
+          
+      <span
+        class="nano-charts-legend-item-badge"
+        style="background-color: #6a6a6a; color: #6a6a6a;"
+      />
+      
+          Metric B
+        
+    </span>
+    
+      
+  </div>
   <style>
     
     .nano-charts {
@@ -234,6 +275,36 @@ exports[`Chart initialization allows passing data right away 1`] = `
     }
     .nano-charts-label {
       line-height: 20;
+    }
+    .nano-charts-legend {
+      background-color: #f9f9f9;
+      display: flex;
+      font-family:Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px;
+    }
+    .nano-charts-legend-item {
+      margin: 0 10px;
+    }
+    .nano-charts-legend-item-badge {
+      border-radius: 4px;
+      display: inline-block;
+      height: 8px;
+      margin-right: 6px;
+      position: relative;
+      width: 8px;
+    }
+    .nano-charts-legend-item-badge:before {
+      background-color: currentColor;
+      content: '';
+      display: block;
+      height: 2px;
+      left: -3px;
+      position: absolute;
+      top: 3px;
+      width: 14px;
     }
     .nano-charts-tooltip {
       background-color: rgba(0, 0, 0, 0.8);
@@ -303,6 +374,9 @@ exports[`Chart initialization appends the SVG 1`] = `
   <div
     class="nano-charts-overlay"
   />
+  <div
+    class="nano-charts-legend"
+  />
   <style>
     
     .nano-charts {
@@ -310,6 +384,36 @@ exports[`Chart initialization appends the SVG 1`] = `
     }
     .nano-charts-label {
       line-height: 20;
+    }
+    .nano-charts-legend {
+      background-color: #f9f9f9;
+      display: flex;
+      font-family:Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px;
+    }
+    .nano-charts-legend-item {
+      margin: 0 10px;
+    }
+    .nano-charts-legend-item-badge {
+      border-radius: 4px;
+      display: inline-block;
+      height: 8px;
+      margin-right: 6px;
+      position: relative;
+      width: 8px;
+    }
+    .nano-charts-legend-item-badge:before {
+      background-color: currentColor;
+      content: '';
+      display: block;
+      height: 2px;
+      left: -3px;
+      position: absolute;
+      top: 3px;
+      width: 14px;
     }
     .nano-charts-tooltip {
       background-color: rgba(0, 0, 0, 0.8);
@@ -579,6 +683,43 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
   <div
     class="nano-charts-overlay"
   />
+  <div
+    class="nano-charts-legend"
+  >
+    
+        
+    <span
+      class="nano-charts-legend-item"
+    >
+      
+          
+      <span
+        class="nano-charts-legend-item-badge"
+        style="background-color: violet; color: violet;"
+      />
+      
+          Metric A
+        
+    </span>
+    
+      
+        
+    <span
+      class="nano-charts-legend-item"
+    >
+      
+          
+      <span
+        class="nano-charts-legend-item-badge"
+        style="background-color: #6a6a6a; color: #6a6a6a;"
+      />
+      
+          Metric B
+        
+    </span>
+    
+      
+  </div>
   <style>
     
     .nano-charts {
@@ -586,6 +727,36 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
     }
     .nano-charts-label {
       line-height: 20;
+    }
+    .nano-charts-legend {
+      background-color: #f9f9f9;
+      display: flex;
+      font-family:Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px;
+    }
+    .nano-charts-legend-item {
+      margin: 0 10px;
+    }
+    .nano-charts-legend-item-badge {
+      border-radius: 4px;
+      display: inline-block;
+      height: 8px;
+      margin-right: 6px;
+      position: relative;
+      width: 8px;
+    }
+    .nano-charts-legend-item-badge:before {
+      background-color: currentColor;
+      content: '';
+      display: block;
+      height: 2px;
+      left: -3px;
+      position: absolute;
+      top: 3px;
+      width: 14px;
     }
     .nano-charts-tooltip {
       background-color: rgba(0, 0, 0, 0.8);
@@ -855,6 +1026,43 @@ exports[`Chart setData sets the data 1`] = `
   <div
     class="nano-charts-overlay"
   />
+  <div
+    class="nano-charts-legend"
+  >
+    
+        
+    <span
+      class="nano-charts-legend-item"
+    >
+      
+          
+      <span
+        class="nano-charts-legend-item-badge"
+        style="background-color: violet; color: violet;"
+      />
+      
+          Metric A
+        
+    </span>
+    
+      
+        
+    <span
+      class="nano-charts-legend-item"
+    >
+      
+          
+      <span
+        class="nano-charts-legend-item-badge"
+        style="background-color: #6a6a6a; color: #6a6a6a;"
+      />
+      
+          Metric B
+        
+    </span>
+    
+      
+  </div>
   <style>
     
     .nano-charts {
@@ -862,6 +1070,36 @@ exports[`Chart setData sets the data 1`] = `
     }
     .nano-charts-label {
       line-height: 20;
+    }
+    .nano-charts-legend {
+      background-color: #f9f9f9;
+      display: flex;
+      font-family:Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px;
+    }
+    .nano-charts-legend-item {
+      margin: 0 10px;
+    }
+    .nano-charts-legend-item-badge {
+      border-radius: 4px;
+      display: inline-block;
+      height: 8px;
+      margin-right: 6px;
+      position: relative;
+      width: 8px;
+    }
+    .nano-charts-legend-item-badge:before {
+      background-color: currentColor;
+      content: '';
+      display: block;
+      height: 2px;
+      left: -3px;
+      position: absolute;
+      top: 3px;
+      width: 14px;
     }
     .nano-charts-tooltip {
       background-color: rgba(0, 0, 0, 0.8);

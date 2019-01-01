@@ -1,8 +1,10 @@
 import { getRangesConstraint, getValuesForRange } from './calculations'
 import DEFAULTS from './defaults'
-import Tooltip, { defaultTooltipRenderer } from './tooltip'
+import Legend from './legend'
+import Tooltip from './tooltip'
 import {
   ChartData,
+  Settings,
   TooltipRendererSample,
   ViewportCoordinate
 } from './types'
@@ -11,88 +13,16 @@ import {
   convertToCoordinates,
   convertToPath,
   createElement,
+  createStylesheet,
   createSVGElement,
   formatNumber,
+  mapLabel,
+  reduceCollection,
   setAttributes,
   throttle
 } from './utils'
 
-function reduceCollection<T>(collection: T[]): T[] {
-  return collection.reduce((memo, item, index) => {
-    if (index === 0 || index % 2 === 0) memo.push(item)
-    return memo
-  }, [] as T[])
-}
-
-function mapLabel(label: string | number, index: number) {
-  return {label, index}
-}
-
-function createStylesheet(settings = DEFAULTS): HTMLStyleElement {
-  const {
-    cssClassName,
-    maxLabelHeight,
-    overlayOverlap,
-    paddingH,
-    paddingV
-  } = settings
-
-  const stylesheet = document.createElement('style')
-  stylesheet.innerHTML = `
-    .${cssClassName} {
-      font-family:Arial, Helvetica, sans-serif;
-    }
-    .${cssClassName}-label {
-      line-height: ${maxLabelHeight};
-    }
-    .${cssClassName}-tooltip {
-      background-color: rgba(0, 0, 0, 0.8);
-      border: 1px solid #000;
-      border-radius: 2px;
-      color: #fafafa;
-      font-family:Arial, Helvetica, sans-serif;
-      font-size: 12px;
-      left: 0;
-      line-height: 16px;
-      opacity: 0;
-      padding: 16px;
-      pointer-events: none;
-      position: absolute;
-      top: 0;
-    }
-    .${cssClassName}-tooltip.is-visible {
-      opacity: 1;
-    }
-    .${cssClassName}-tooltip.is-visible:empty {
-      opacity: 0;
-    }
-    .${cssClassName}-overlay {
-      bottom: ${paddingV - overlayOverlap}px;
-      left: ${paddingH - overlayOverlap}px;
-      position: absolute;
-      right: ${paddingH - overlayOverlap}px;
-      top: ${paddingV - overlayOverlap}px;
-    }
-    .${cssClassName}-title {
-      font-weight: 600;
-      margin: 0 0 8px 0;
-    }
-    .${cssClassName}-item {
-      margin: 0;
-    }
-    .${cssClassName}-badge {
-      border-radius: 4px;
-      display: inline-block;
-      height: 8px;
-      margin-right: 4px;
-      width: 8px;
-    }
-  `
-  return stylesheet
-}
-
 export default class Chart {
-
   private get rangesConstraint() {
     return getRangesConstraint(this.data)
   }
@@ -115,6 +45,12 @@ export default class Chart {
   private get clientRect() {
     if (!this.cachedClientRect) this.cachedClientRect = this.el.getBoundingClientRect()
     return this.cachedClientRect
+  }
+
+  private get legendData() {
+    return Object.keys(this.data.samples).map(key => ({
+      key, color: this.getStrokeColorFor(key)
+    }))
   }
 
   private resizeHandler = throttle(() => {
@@ -178,6 +114,7 @@ export default class Chart {
   private mainArea: SVGElement
   private expandedArea: SVGElement
   private tooltip: Tooltip
+  private legend: Legend
   private style: HTMLStyleElement
   private hoverOverlay: HTMLDivElement
   private destroyed = false
@@ -213,16 +150,19 @@ export default class Chart {
     this.svg.appendChild(this.expandedArea)
 
     // Render the tooltip
-
-    this.tooltip = new Tooltip(defaultTooltipRenderer)
+    this.tooltip = new Tooltip(DEFAULTS)
     this.el.appendChild(this.tooltip.el)
 
     // Render overlay for hover events tracking
     this.hoverOverlay = createElement('div', {class: DEFAULTS.cssClassName + '-overlay'}) as HTMLDivElement
     this.el.appendChild(this.hoverOverlay)
 
+    // Render the legend
+    this.legend = new Legend(DEFAULTS)
+    this.el.appendChild(this.legend.el)
+
     // Render CSS
-    this.style = createStylesheet()
+    this.style = createStylesheet(DEFAULTS)
     this.el.appendChild(this.style)
 
     this.resetCache()
@@ -235,6 +175,7 @@ export default class Chart {
   setData(data: ChartData) {
     this.data = data
     this.render()
+    this.legend.update(this.legendData)
   }
 
   destroy() {
@@ -364,11 +305,12 @@ export default class Chart {
   }
 
   private drawXLabel(label: string, offset: number): SVGTextElement {
+    const {labelFontSize, paddingV, maxLabelWidth} = DEFAULTS
     const {paddedViewport, expandedArea} = this
     const text = createSVGElement('text', {
-      'font-size': DEFAULTS.labelFontSize,
+      'font-size': labelFontSize,
       'x': offset,
-      'y': (paddedViewport.height + DEFAULTS.paddingV * 1.5), // Place in the middle of the bottom padding area
+      'y': (paddedViewport.height + paddingV * 1.5), // Place in the middle of the bottom padding area
       'text-anchor': 'middle',
       'alignment-baseline': 'middle'
     }) as SVGTextElement
@@ -376,17 +318,18 @@ export default class Chart {
     text.textContent = label
 
     expandedArea.appendChild(text)
-    this.truncateLabel(text, DEFAULTS.maxLabelWidth)
+    this.truncateLabel(text, maxLabelWidth)
 
     return text
   }
 
   private drawYLabel(label: string, offset: number): SVGTextElement {
-    const {paddedViewport, expandedArea} = this
+    const {labelFontSize, paddingH} = DEFAULTS
+    const {paddedViewport: {height}, expandedArea} = this
     const text = createSVGElement('text', {
-      'font-size': DEFAULTS.labelFontSize,
-      'y': (paddedViewport.height - offset),
-      'x': (DEFAULTS.paddingH / 2),
+      'font-size': labelFontSize,
+      'y': (height - offset),
+      'x': (paddingH / 2),
       'text-anchor': 'end',
       'alignment-baseline': 'middle'
     }) as SVGTextElement
@@ -433,13 +376,14 @@ export default class Chart {
     coordinates: ViewportCoordinate[],
     color: string
   ): SVGCircleElement[] {
+    const {pointRadius} = DEFAULTS
     const {mainArea} = this
     const points: SVGCircleElement[] = []
 
     // Draw points
     coordinates.forEach(coordinate => {
       const circle = createSVGElement('circle', {
-        r: DEFAULTS.pointRadius,
+        r: pointRadius,
         fill: color,
         cx: coordinate[0],
         cy: coordinate[1]
@@ -453,13 +397,14 @@ export default class Chart {
   }
 
   private drawGridXLine(offset: number): SVGLineElement {
-    const {paddedViewport, mainArea} = this
+    const {yGridOverflowSize, gridColor} = DEFAULTS
+    const {paddedViewport: {height}, mainArea} = this
     const line = createSVGElement('line', {
       x1: offset,
       x2: offset,
-      y1: -DEFAULTS.yGridOverflowSize,
-      y2: (paddedViewport.height + DEFAULTS.yGridOverflowSize),
-      stroke: DEFAULTS.gridColor
+      y1: -yGridOverflowSize,
+      y2: (height + yGridOverflowSize),
+      stroke: gridColor
     }) as SVGLineElement
 
     mainArea.appendChild(line)
@@ -467,13 +412,14 @@ export default class Chart {
   }
 
   private drawGridYLine(offset: number): SVGLineElement {
-    const {paddedViewport, mainArea} = this
+    const {xGridOverflowSize, gridColor} = DEFAULTS
+    const {paddedViewport: {width, height}, mainArea} = this
     const line = createSVGElement('line', {
-      x1: -DEFAULTS.xGridOverflowSize,
-      x2: (paddedViewport.width + DEFAULTS.xGridOverflowSize),
-      y1: (paddedViewport.height - offset),
-      y2: (paddedViewport.height - offset),
-      stroke: DEFAULTS.gridColor
+      x1: -xGridOverflowSize,
+      x2: (width + xGridOverflowSize),
+      y1: (height - offset),
+      y2: (height - offset),
+      stroke: gridColor
     }) as SVGLineElement
 
     mainArea.appendChild(line)
