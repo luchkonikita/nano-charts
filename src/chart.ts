@@ -58,12 +58,12 @@ function createStylesheet(settings = DEFAULTS): HTMLStyleElement {
       pointer-events: none;
       position: absolute;
       top: 0;
-      transition-delay: 150ms;
-      transition-duration: 150ms;
-      transition-property: opacity;
     }
     .${cssClassName}-tooltip.is-visible {
       opacity: 1;
+    }
+    .${cssClassName}-tooltip.is-visible:empty {
+      opacity: 0;
     }
     .${cssClassName}-overlay {
       bottom: ${paddingV - overlayOverlap}px;
