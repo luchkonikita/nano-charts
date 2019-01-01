@@ -83,7 +83,7 @@ exports[`Chart initialization allows passing data right away 1`] = `
         y2="0"
       />
       <path
-        d="M 0 72,L 420 84,L 840 96"
+        d="M 0 72 L 420 84 L 840 96"
         fill="transparent"
         stroke="violet"
         stroke-width="1"
@@ -107,13 +107,13 @@ exports[`Chart initialization allows passing data right away 1`] = `
         r="2"
       />
       <path
-        d="M 0 72,L 420 84,L 840 96,L 840 72,L 0 72"
+        d="M 0 72 L 420 84 L 840 96 L 840 72 L 0 72"
         fill="violet"
         stroke="transparent"
         stroke-width="1"
       />
       <path
-        d="M 0 96,L 420 84,L 840 120"
+        d="M 0 96 L 420 84 L 840 120"
         fill="transparent"
         stroke="#6a6a6a"
         stroke-width="1"
@@ -249,12 +249,12 @@ exports[`Chart initialization allows passing data right away 1`] = `
       pointer-events: none;
       position: absolute;
       top: 0;
-      transition-delay: 150ms;
-      transition-duration: 150ms;
-      transition-property: opacity;
     }
     .nano-charts-tooltip.is-visible {
       opacity: 1;
+    }
+    .nano-charts-tooltip.is-visible:empty {
+      opacity: 0;
     }
     .nano-charts-overlay {
       bottom: 30px;
@@ -325,12 +325,12 @@ exports[`Chart initialization appends the SVG 1`] = `
       pointer-events: none;
       position: absolute;
       top: 0;
-      transition-delay: 150ms;
-      transition-duration: 150ms;
-      transition-property: opacity;
     }
     .nano-charts-tooltip.is-visible {
       opacity: 1;
+    }
+    .nano-charts-tooltip.is-visible:empty {
+      opacity: 0;
     }
     .nano-charts-overlay {
       bottom: 30px;
@@ -435,7 +435,7 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
         y2="0"
       />
       <path
-        d="M 0 72,L 320 84,L 640 96"
+        d="M 0 72 L 320 84 L 640 96"
         fill="transparent"
         stroke="violet"
         stroke-width="1"
@@ -459,13 +459,13 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
         r="2"
       />
       <path
-        d="M 0 72,L 320 84,L 640 96,L 640 72,L 0 72"
+        d="M 0 72 L 320 84 L 640 96 L 640 72 L 0 72"
         fill="violet"
         stroke="transparent"
         stroke-width="1"
       />
       <path
-        d="M 0 96,L 320 84,L 640 120"
+        d="M 0 96 L 320 84 L 640 120"
         fill="transparent"
         stroke="#6a6a6a"
         stroke-width="1"
@@ -601,12 +601,12 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
       pointer-events: none;
       position: absolute;
       top: 0;
-      transition-delay: 150ms;
-      transition-duration: 150ms;
-      transition-property: opacity;
     }
     .nano-charts-tooltip.is-visible {
       opacity: 1;
+    }
+    .nano-charts-tooltip.is-visible:empty {
+      opacity: 0;
     }
     .nano-charts-overlay {
       bottom: 30px;
@@ -711,7 +711,7 @@ exports[`Chart setData sets the data 1`] = `
         y2="0"
       />
       <path
-        d="M 0 72,L 420 84,L 840 96"
+        d="M 0 72 L 420 84 L 840 96"
         fill="transparent"
         stroke="violet"
         stroke-width="1"
@@ -735,13 +735,13 @@ exports[`Chart setData sets the data 1`] = `
         r="2"
       />
       <path
-        d="M 0 72,L 420 84,L 840 96,L 840 72,L 0 72"
+        d="M 0 72 L 420 84 L 840 96 L 840 72 L 0 72"
         fill="violet"
         stroke="transparent"
         stroke-width="1"
       />
       <path
-        d="M 0 96,L 420 84,L 840 120"
+        d="M 0 96 L 420 84 L 840 120"
         fill="transparent"
         stroke="#6a6a6a"
         stroke-width="1"
@@ -877,12 +877,12 @@ exports[`Chart setData sets the data 1`] = `
       pointer-events: none;
       position: absolute;
       top: 0;
-      transition-delay: 150ms;
-      transition-duration: 150ms;
-      transition-property: opacity;
     }
     .nano-charts-tooltip.is-visible {
       opacity: 1;
+    }
+    .nano-charts-tooltip.is-visible:empty {
+      opacity: 0;
     }
     .nano-charts-overlay {
       bottom: 30px;
