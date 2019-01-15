@@ -9,17 +9,11 @@ import {
 } from './types'
 
 export function throttle<T extends (...args: any[]) => any>(fn: T, time: number): T {
-  let pending = false
+  let timeout: NodeJS.Timeout | null = null
 
   const throttled = (...args: any[]) => {
-    if (pending) return
-    pending = true
-
-    fn(...args)
-
-    setTimeout(() => {
-      pending = false
-    }, time)
+    if (timeout) clearTimeout(timeout)
+    timeout = setTimeout(() => fn(...args), time)
   }
 
   return throttled as T

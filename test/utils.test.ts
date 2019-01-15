@@ -18,11 +18,10 @@ describe('Utils', () => {
       const throttled = throttle(fn, 50)
 
       throttled()
-      throttled()
 
       setTimeout(() => {
         throttled()
-        expect(fn).toHaveBeenCalledTimes(2)
+        expect(fn).toHaveBeenCalledTimes(1)
         done()
       }, 100)
     })
