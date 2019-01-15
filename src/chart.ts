@@ -4,7 +4,7 @@ import Legend from './legend'
 import Tooltip from './tooltip'
 import {
   ChartData,
-  Settings,
+  RangesConstraint,
   TooltipRendererSample,
   ViewportCoordinate
 } from './types'
@@ -15,6 +15,7 @@ import {
   createElement,
   createStylesheet,
   createSVGElement,
+  debounce,
   formatNumber,
   mapLabel,
   reduceCollection,
@@ -24,7 +25,8 @@ import {
 
 export default class Chart {
   private get rangesConstraint() {
-    return getRangesConstraint(this.data)
+    if (!this.cachedRangesConstraint) this.cachedRangesConstraint = getRangesConstraint(this.data)
+    return this.cachedRangesConstraint
   }
 
   private get paddedViewport() {
@@ -53,7 +55,7 @@ export default class Chart {
     }))
   }
 
-  private resizeHandler = throttle(() => {
+  private resizeHandler = debounce(() => {
     this.resetCache()
     this.setSize()
     this.render()
@@ -127,6 +129,7 @@ export default class Chart {
 
   // Misc, caching, etc...
   private cachedClientRect?: ClientRect
+  private cachedRangesConstraint?: RangesConstraint
   private hovered = false
   private hoveredIndex = -1
   private points: SVGCircleElement[][] = []
@@ -235,6 +238,7 @@ export default class Chart {
   }
 
   private resetCache() {
+    this.cachedRangesConstraint = undefined
     this.cachedClientRect = undefined
     this.mainArea.innerHTML = ''
     this.expandedArea.innerHTML = ''

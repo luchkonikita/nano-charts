@@ -8,12 +8,29 @@ import {
   ViewportCoordinate
 } from './types'
 
-export function throttle<T extends (...args: any[]) => any>(fn: T, time: number): T {
+export function debounce<T extends (...args: any[]) => any>(fn: T, time: number): T {
   let timeout: NodeJS.Timeout | null = null
 
   const throttled = (...args: any[]) => {
     if (timeout) clearTimeout(timeout)
     timeout = setTimeout(() => fn(...args), time)
+  }
+
+  return throttled as T
+}
+
+export function throttle<T extends (...args: any[]) => any>(fn: T, time: number): T {
+  let pending = false
+
+  const throttled = (...args: any[]) => {
+    if (pending) return
+    pending = true
+
+    fn(...args)
+
+    setTimeout(() => {
+      pending = false
+    }, time)
   }
 
   return throttled as T

@@ -1,4 +1,4 @@
-import { formatNumber, throttle } from '../src/utils'
+import { debounce, formatNumber, throttle } from '../src/utils'
 
 describe('Utils', () => {
   describe('formatNumber', () => {
@@ -18,12 +18,33 @@ describe('Utils', () => {
       const throttled = throttle(fn, 50)
 
       throttled()
+      throttled()
 
       setTimeout(() => {
         throttled()
+        expect(fn).toHaveBeenCalledTimes(2)
+        done()
+      }, 100)
+    })
+  })
+
+  describe('debounce', () => {
+    it('debounces the execution', done => {
+      const fn = jest.fn()
+      const debounced = debounce(fn, 50)
+
+      debounced()
+
+      setTimeout(() => {
+        debounced()
         expect(fn).toHaveBeenCalledTimes(1)
         done()
       }, 100)
+
+      setTimeout(() => {
+        expect(fn).toHaveBeenCalledTimes(2)
+        done()
+      }, 200)
     })
   })
 })
