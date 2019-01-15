@@ -297,8 +297,8 @@ export default class Chart {
       // Fill the polygon with the color only is specified.
       if (!fillColor) return
       const areaCoordinates = coordinates.concat([
-        convertToCoordinate(samples.length - 1, 0, this.paddedViewport, rangesConstraint),
-        convertToCoordinate(0, 0, this.paddedViewport, rangesConstraint)
+        convertToCoordinate(samples.length - 1, rangesConstraint.yValues.min, this.paddedViewport, rangesConstraint),
+        convertToCoordinate(0, rangesConstraint.yValues.min, this.paddedViewport, rangesConstraint)
       ])
       this.drawDataArea(areaCoordinates, fillColor)
     })

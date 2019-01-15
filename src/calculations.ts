@@ -43,16 +43,23 @@ export function getValuesForRange(range: Range): number[] {
   return result
 }
 
-function extendNumber(n: number): number {
+function extendNumber(n: number, round: 'floor' | 'ceil'): number {
+  if (n === 0) return 0
   const str = Math.floor(Math.abs(n)).toString()
   const factor = n === 0 ? 0 : n / Math.abs(n)
-  return (parseInt(str[0], 10) + 1) * Math.pow(10, str.length - 1) * factor
+  let firstNum = parseInt(str[0], 10) * factor
+  if (round === 'ceil') {
+    firstNum = firstNum + 1
+  } else {
+    firstNum = firstNum - 1
+  }
+  return firstNum * Math.pow(10, str.length - 1)
 }
 
 export function extendRange(range: Range): Range {
   return {
-    min: extendNumber(range.min),
-    max: extendNumber(range.max)
+    min: extendNumber(range.min, 'floor'),
+    max: extendNumber(range.max, 'ceil')
   }
 }
 
