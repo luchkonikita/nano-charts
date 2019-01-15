@@ -472,7 +472,7 @@ export default class Chart {
     const position = xOffset - DEFAULTS.paddingH - this.clientRect.left
     const total = this.paddedViewport.width
     const maxIndex = this.data.labels.length - 1
-    const percentage = Math.ceil(position / total * 100)
+    const percentage = position / total * 100
     if (percentage < 0) return 0
     if (percentage > 100) return maxIndex
     return Math.round(maxIndex / 100 * percentage)
