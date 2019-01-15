@@ -83,15 +83,14 @@ export function convertToCoordinate(
   const yByViewport: Range = { min: 0, max: viewport.height }
   const xByViewport: Range =  { min: 0, max: viewport.width }
 
-  return [
-    calculateRangeProjection(rangesConstraint.xValues, xByViewport, x),
-    // For y axis - we need to invert the coordinate as SVG starts from the top-left corner.
-    viewport.height - calculateRangeProjection(rangesConstraint.yValues, yByViewport, y)
-  ]
+  const xProjection = calculateRangeProjection(rangesConstraint.xValues, xByViewport, x)
+  const yProjection = calculateRangeProjection(rangesConstraint.yValues, yByViewport, y)
+
+  return [xProjection, viewport.height - yProjection]
 }
 
 export function formatNumber(value: number): string {
-  const coefficient = Math.pow(10, value.toString().length - 1)
+  const coefficient = Math.pow(10, Math.abs(value).toString().length - 1)
 
   if (coefficient >= 1000000000000) return (value / 1000000000000).toString() + 't'
   if (coefficient >= 1000000000) return (value / 1000000000).toString() + 'b'

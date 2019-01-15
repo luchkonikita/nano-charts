@@ -87,7 +87,7 @@ exports[`Chart initialization allows passing data right away 1`] = `
         y2="0"
       />
       <path
-        d="M 0 72 L 420 84 L 840 96"
+        d="M 0 72 L 420 60 L 840 48"
         fill="transparent"
         stroke="violet"
         stroke-width="1"
@@ -100,24 +100,24 @@ exports[`Chart initialization allows passing data right away 1`] = `
       />
       <circle
         cx="420"
-        cy="84"
+        cy="60"
         fill="violet"
         r="2"
       />
       <circle
         cx="840"
-        cy="96"
+        cy="48"
         fill="violet"
         r="2"
       />
       <path
-        d="M 0 72 L 420 84 L 840 96 L 840 120 L 0 120"
+        d="M 0 72 L 420 60 L 840 48 L 840 120 L 0 120"
         fill="violet"
         stroke="transparent"
         stroke-width="1"
       />
       <path
-        d="M 0 96 L 420 84 L 840 120"
+        d="M 0 96 L 420 60 L 840 24"
         fill="transparent"
         stroke="#6a6a6a"
         stroke-width="1"
@@ -130,13 +130,13 @@ exports[`Chart initialization allows passing data right away 1`] = `
       />
       <circle
         cx="420"
-        cy="84"
+        cy="60"
         fill="#6a6a6a"
         r="2"
       />
       <circle
         cx="840"
-        cy="120"
+        cy="24"
         fill="#6a6a6a"
         r="2"
       />
@@ -539,7 +539,7 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
         y2="0"
       />
       <path
-        d="M 0 72 L 320 84 L 640 96"
+        d="M 0 72 L 320 60 L 640 48"
         fill="transparent"
         stroke="violet"
         stroke-width="1"
@@ -552,24 +552,24 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
       />
       <circle
         cx="320"
-        cy="84"
+        cy="60"
         fill="violet"
         r="2"
       />
       <circle
         cx="640"
-        cy="96"
+        cy="48"
         fill="violet"
         r="2"
       />
       <path
-        d="M 0 72 L 320 84 L 640 96 L 640 120 L 0 120"
+        d="M 0 72 L 320 60 L 640 48 L 640 120 L 0 120"
         fill="violet"
         stroke="transparent"
         stroke-width="1"
       />
       <path
-        d="M 0 96 L 320 84 L 640 120"
+        d="M 0 96 L 320 60 L 640 24"
         fill="transparent"
         stroke="#6a6a6a"
         stroke-width="1"
@@ -582,13 +582,13 @@ exports[`Chart resize re-calculates the coordinates 1`] = `
       />
       <circle
         cx="320"
-        cy="84"
+        cy="60"
         fill="#6a6a6a"
         r="2"
       />
       <circle
         cx="640"
-        cy="120"
+        cy="24"
         fill="#6a6a6a"
         r="2"
       />
@@ -882,7 +882,7 @@ exports[`Chart setData sets the data 1`] = `
         y2="0"
       />
       <path
-        d="M 0 72 L 420 84 L 840 96"
+        d="M 0 72 L 420 60 L 840 48"
         fill="transparent"
         stroke="violet"
         stroke-width="1"
@@ -895,24 +895,24 @@ exports[`Chart setData sets the data 1`] = `
       />
       <circle
         cx="420"
-        cy="84"
+        cy="60"
         fill="violet"
         r="2"
       />
       <circle
         cx="840"
-        cy="96"
+        cy="48"
         fill="violet"
         r="2"
       />
       <path
-        d="M 0 72 L 420 84 L 840 96 L 840 120 L 0 120"
+        d="M 0 72 L 420 60 L 840 48 L 840 120 L 0 120"
         fill="violet"
         stroke="transparent"
         stroke-width="1"
       />
       <path
-        d="M 0 96 L 420 84 L 840 120"
+        d="M 0 96 L 420 60 L 840 24"
         fill="transparent"
         stroke="#6a6a6a"
         stroke-width="1"
@@ -925,13 +925,13 @@ exports[`Chart setData sets the data 1`] = `
       />
       <circle
         cx="420"
-        cy="84"
+        cy="60"
         fill="#6a6a6a"
         r="2"
       />
       <circle
         cx="840"
-        cy="120"
+        cy="24"
         fill="#6a6a6a"
         r="2"
       />

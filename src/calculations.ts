@@ -100,12 +100,8 @@ export function calculateRangeProjection(baseRange: Range, targetRange: Range, v
 
   const baseRangeTotal = baseRange.max - baseRange.min
   const targetRangeTotal = targetRange.max - targetRange.min
+  const baseDelta = Math.abs(value - baseRange.min)
 
-  const baseDelta = Math.abs(
-    value < 0
-      ? value - baseRange.min
-      : value - Math.abs(baseRange.min)
-  )
   const coefficient = baseDelta / baseRangeTotal
   return targetRange.min + (targetRangeTotal * coefficient)
 }

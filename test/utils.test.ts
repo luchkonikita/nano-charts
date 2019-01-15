@@ -9,6 +9,7 @@ describe('Utils', () => {
       expect(formatNumber(99100000)).toEqual('99.1m')
       expect(formatNumber(99100000000)).toEqual('99.1b')
       expect(formatNumber(99100000000000)).toEqual('99.1t')
+      expect(formatNumber(-200)).toEqual('-200')
     })
   })
 

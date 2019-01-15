@@ -15,7 +15,7 @@ export default class Tooltip {
       content += `
         <p class="${cssClassName}-item">
           <span class="${cssClassName}-badge" style="background-color: ${color};"></span>
-          ${key} - ${value}
+          ${key}: ${value}
         </p>
       `
     })
